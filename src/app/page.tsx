@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 type LinkItem = {
@@ -7,8 +8,8 @@ type LinkItem = {
 };
 
 const profile = {
-  name: "김링크",
-  bio: "한 사람도 버리지 않는다 · 나는 수학교사다",
+  name: "강창대",
+  bio: "한 사람도 소외시키지 않는 수학교사",
 };
 
 const links: LinkItem[] = [
@@ -44,43 +45,54 @@ const links: LinkItem[] = [
 
 export default function Home() {
   return (
-    <div className="flex flex-1 items-center justify-center bg-zinc-50 px-4 py-12 font-sans dark:bg-black">
-      <main className="w-full max-w-sm rounded-[2rem] border border-black/[.06] bg-white px-8 py-10 shadow-sm dark:border-white/[.08] dark:bg-zinc-950">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-rose-100 px-6 py-16 dark:from-stone-950 dark:via-neutral-900 dark:to-amber-950">
+      {/* 은은한 배경 장식 */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-orange-200/40 blur-3xl dark:bg-amber-900/20"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-16 -bottom-24 h-80 w-80 rounded-full bg-rose-200/40 blur-3xl dark:bg-rose-900/10"
+      />
+
+      <main className="relative w-full max-w-sm">
         {/* 프로필 */}
         <section className="flex flex-col items-center text-center">
-          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 text-4xl dark:from-emerald-800 dark:to-emerald-600">
-            🌳
+          <div className="relative h-32 w-32 overflow-hidden rounded-full shadow-[0_12px_30px_-8px_rgba(154,82,18,0.35)] ring-4 ring-white/70 dark:ring-white/10">
+            <Image
+              src="/profile.jpg"
+              alt={profile.name}
+              fill
+              sizes="128px"
+              className="object-cover"
+              priority
+            />
+            <div className="pointer-events-none absolute inset-0 rounded-full shadow-[inset_0_2px_6px_rgba(255,255,255,0.5)]" />
           </div>
-          <h1 className="mt-5 text-xl font-semibold text-zinc-900 dark:text-zinc-50">
+          <h1 className="mt-6 text-2xl font-bold tracking-tight text-stone-800 dark:text-stone-50">
             {profile.name}
           </h1>
-          <p className="mt-2 max-w-[240px] text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+          <p className="mt-2 max-w-[260px] text-sm leading-relaxed text-stone-500 dark:text-stone-300/80">
             {profile.bio}
           </p>
         </section>
 
         {/* 링크 카드 */}
-        <nav className="mt-8 flex flex-col gap-3">
+        <nav className="mt-10 flex flex-col gap-4">
           {links.map((link) => (
             <a
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-2xl border border-black/[.08] px-5 py-4 text-sm font-medium text-zinc-800 transition-colors hover:border-transparent hover:bg-emerald-50 dark:border-white/[.1] dark:text-zinc-100 dark:hover:bg-emerald-950/40"
+              className="flex items-center gap-3 rounded-2xl border border-white/50 bg-white/40 px-5 py-4 text-sm font-medium text-stone-700 shadow-[0_4px_20px_-6px_rgba(120,53,15,0.15)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/70 hover:bg-white/60 dark:border-white/10 dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10"
             >
-              <span className="text-emerald-600 dark:text-emerald-400">{link.icon}</span>
+              <span className="text-amber-600 dark:text-amber-400">{link.icon}</span>
               {link.label}
             </a>
           ))}
         </nav>
-
-        {/* 브랜드 장식 */}
-        <div className="mt-10 flex justify-center gap-4 text-emerald-400 dark:text-emerald-700">
-          <span aria-hidden>🌱</span>
-          <span aria-hidden>🌱</span>
-          <span aria-hidden>🌱</span>
-        </div>
       </main>
     </div>
   );
