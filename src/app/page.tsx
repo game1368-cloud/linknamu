@@ -1,11 +1,5 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
-
-type LinkItem = {
-  label: string;
-  href: string;
-  icon: ReactNode;
-};
+import LinkList, { type LinkItem } from "@/components/LinkList";
 
 const profile = {
   name: "강창대",
@@ -14,6 +8,7 @@ const profile = {
 
 const links: LinkItem[] = [
   {
+    id: "github",
     label: "GitHub",
     href: "https://github.com/",
     icon: (
@@ -23,6 +18,7 @@ const links: LinkItem[] = [
     ),
   },
   {
+    id: "linkedin",
     label: "LinkedIn",
     href: "https://www.linkedin.com/",
     icon: (
@@ -32,6 +28,7 @@ const links: LinkItem[] = [
     ),
   },
   {
+    id: "blog",
     label: "Blog",
     href: "https://example.com/",
     icon: (
@@ -79,20 +76,7 @@ export default function Home() {
         </section>
 
         {/* 링크 카드 */}
-        <nav className="mt-10 flex flex-col gap-4">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-2xl border border-white/50 bg-white/40 px-5 py-4 text-sm font-medium text-stone-700 shadow-[0_4px_20px_-6px_rgba(120,53,15,0.15)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/70 hover:bg-white/60 dark:border-white/10 dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10"
-            >
-              <span className="text-amber-600 dark:text-amber-400">{link.icon}</span>
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <LinkList links={links} />
       </main>
     </div>
   );
